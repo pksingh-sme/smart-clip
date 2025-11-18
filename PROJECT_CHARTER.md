@@ -1,4 +1,4 @@
-# StreamHub Project Charter
+# SmartClip Project Charter
 
 ## 1. Project Vision & Objectives
 

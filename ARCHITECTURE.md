@@ -1,4 +1,4 @@
-# StreamHub Architecture & Setup Guide
+# SmartClip Architecture & Setup Guide
 
 ## 1. High-Level System Architecture
 
@@ -375,9 +375,9 @@ Create a `.env` file in the root directory:
 # Database
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=streamhub_dev
-DB_USER=streamhub_user
-DB_PASSWORD=streamhub_password
+DB_NAME=smartclip_dev
+DB_USER=smartclip_user
+DB_PASSWORD=smartclip_password
 
 # Redis
 REDIS_HOST=localhost
@@ -396,8 +396,8 @@ AWS_REGION=us-east-1
 OPENAI_API_KEY=your_openai_api_key
 
 # Storage
-VIDEO_STORAGE_BUCKET=streamhub-videos
-THUMBNAIL_STORAGE_BUCKET=streamhub-thumbnails
+VIDEO_STORAGE_BUCKET=smartclip-videos
+THUMBNAIL_STORAGE_BUCKET=smartclip-thumbnails
 
 # Ports
 API_PORT=3000
@@ -412,9 +412,9 @@ docker-compose up -d postgres redis
 
 2. Create database and user:
 ```sql
-CREATE DATABASE streamhub_dev;
-CREATE USER streamhub_user WITH ENCRYPTED PASSWORD 'streamhub_password';
-GRANT ALL PRIVILEGES ON DATABASE streamhub_dev TO streamhub_user;
+CREATE DATABASE smartclip_dev;
+CREATE USER smartclip_user WITH ENCRYPTED PASSWORD 'smartclip_password';
+GRANT ALL PRIVILEGES ON DATABASE smartclip_dev TO smartclip_user;
 ```
 
 3. Run database migrations:

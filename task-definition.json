@@ -1,12 +1,12 @@
 {
-  "family": "streamhub-backend",
+  "family": "smartclip-backend",
   "networkMode": "awsvpc",
   "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/StreamHubTaskRole",
+  "taskRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/SmartClipTaskRole",
   "containerDefinitions": [
     {
-      "name": "streamhub-backend",
-      "image": "YOUR_ECR_REPOSITORY/streamhub-backend:latest",
+      "name": "smartclip-backend",
+      "image": "YOUR_ECR_REPOSITORY/smartclip-backend:latest",
       "cpu": 512,
       "memory": 1024,
       "portMappings": [
@@ -31,11 +31,11 @@
         },
         {
           "name": "DB_NAME",
-          "value": "streamhub_prod"
+          "value": "smartclip_prod"
         },
         {
           "name": "DB_USER",
-          "value": "streamhub_user"
+          "value": "smartclip_user"
         },
         {
           "name": "DB_PASSWORD",
@@ -56,21 +56,30 @@
         {
           "name": "JWT_REFRESH_SECRET",
           "value": "YOUR_JWT_REFRESH_SECRET"
+        },
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "value": "YOUR_AWS_ACCESS_KEY_ID"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "value": "YOUR_AWS_SECRET_ACCESS_KEY"
+        },
+        {
+          "name": "OPENAI_API_KEY",
+          "value": "YOUR_OPENAI_API_KEY"
         }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "/ecs/streamhub-backend",
+          "awslogs-group": "/ecs/smartclip-backend",
           "awslogs-region": "us-east-1",
           "awslogs-stream-prefix": "ecs"
         }
       },
       "healthCheck": {
-        "command": [
-          "CMD-SHELL",
-          "curl -f http://localhost:3000/health || exit 1"
-        ],
+        "command": ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"],
         "interval": 30,
         "timeout": 5,
         "retries": 3,
@@ -78,9 +87,7 @@
       }
     }
   ],
-  "requiresCompatibilities": [
-    "FARGATE"
-  ],
+  "requiresCompatibilities": ["FARGATE"],
   "cpu": "512",
   "memory": "1024"
 }

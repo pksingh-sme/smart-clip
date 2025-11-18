@@ -1,6 +1,6 @@
-# StreamHub Deployment Guide
+# SmartClip Deployment Guide
 
-This guide provides instructions for deploying StreamHub, a YouTube-like video streaming platform, in various environments.
+This guide provides instructions for deploying SmartClip, a YouTube-like video streaming platform, in various environments.
 
 ## Table of Contents
 
@@ -29,7 +29,7 @@ This guide provides instructions for deploying StreamHub, a YouTube-like video s
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd streamhub
+   cd smartclip
    ```
 
 2. Create a `.env` file with your configuration:
@@ -94,25 +94,25 @@ This guide provides instructions for deploying StreamHub, a YouTube-like video s
 
 1. Build the Docker image:
    ```bash
-   docker build -t streamhub-backend .
+   docker build -t smartclip-backend .
    ```
 
 2. Run the container:
    ```bash
    docker run -d \
-     --name streamhub-backend \
+     --name smartclip-backend \
      -p 3000:3000 \
      -e NODE_ENV=production \
      -e DB_HOST=your-db-host \
      -e DB_PORT=5432 \
-     -e DB_NAME=streamhub_prod \
-     -e DB_USER=streamhub_user \
+     -e DB_NAME=smartclip_prod \
+     -e DB_USER=smartclip_user \
      -e DB_PASSWORD=your-db-password \
      -e REDIS_HOST=your-redis-host \
      -e REDIS_PORT=6379 \
      -e JWT_SECRET=your-jwt-secret \
      -e JWT_REFRESH_SECRET=your-jwt-refresh-secret \
-     streamhub-backend
+     smartclip-backend
    ```
 
 #### Frontend
@@ -131,7 +131,7 @@ This guide provides instructions for deploying StreamHub, a YouTube-like video s
 
 1. Create an ECR repository:
    ```bash
-   aws ecr create-repository --repository-name streamhub-backend
+   aws ecr create-repository --repository-name smartclip-backend
    ```
 
 2. Build and push the Docker image:
@@ -140,11 +140,11 @@ This guide provides instructions for deploying StreamHub, a YouTube-like video s
    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin YOUR_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
 
    # Build and tag the image
-   docker build -t streamhub-backend .
-   docker tag streamhub-backend:latest YOUR_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/streamhub-backend:latest
+   docker build -t smartclip-backend .
+   docker tag smartclip-backend:latest YOUR_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/smartclip-backend:latest
 
    # Push the image
-   docker push YOUR_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/streamhub-backend:latest
+   docker push YOUR_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/smartclip-backend:latest
    ```
 
 3. Create ECS task definition using `task-definition.json`:
@@ -156,8 +156,8 @@ This guide provides instructions for deploying StreamHub, a YouTube-like video s
    ```bash
    aws ecs create-service \
      --cluster your-cluster-name \
-     --service-name streamhub-backend-service \
-     --task-definition streamhub-backend \
+     --service-name smartclip-backend-service \
+     --task-definition smartclip-backend \
      --desired-count 1 \
      --launch-type FARGATE \
      --network-configuration "awsvpcConfiguration={subnets=[subnet-12345678],securityGroups=[sg-12345678],assignPublicIp=ENABLED}"
@@ -168,13 +168,13 @@ This guide provides instructions for deploying StreamHub, a YouTube-like video s
 1. Create a PostgreSQL RDS instance:
    ```bash
    aws rds create-db-instance \
-     --db-instance-identifier streamhub-db \
+     --db-instance-identifier smartclip-db \
      --db-instance-class db.t3.micro \
      --engine postgres \
-     --master-username streamhub_user \
+     --master-username smartclip_user \
      --master-user-password your-password \
      --allocated-storage 20 \
-     --db-name streamhub_prod
+     --db-name smartclip_prod
    ```
 
 ### Elasticache Redis Setup
@@ -182,7 +182,7 @@ This guide provides instructions for deploying StreamHub, a YouTube-like video s
 1. Create an ElastiCache Redis cluster:
    ```bash
    aws elasticache create-cache-cluster \
-     --cache-cluster-id streamhub-redis \
+     --cache-cluster-id smartclip-redis \
      --cache-node-type cache.t3.micro \
      --engine redis \
      --num-cache-nodes 1
@@ -337,8 +337,8 @@ In case of deployment issues:
    ```bash
    aws ecs update-service \
      --cluster your-cluster-name \
-     --service streamhub-backend-service \
-     --task-definition streamhub-backend:previous-revision
+     --service smartclip-backend-service \
+     --task-definition smartclip-backend:previous-revision
    ```
 
 3. **Database Rollback**:

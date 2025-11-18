@@ -4,29 +4,28 @@ services:
   # PostgreSQL database
   postgres:
     image: postgres:15-alpine
-    container_name: streamhub-postgres-prod
+    container_name: smartclip-postgres-prod
     restart: always
     environment:
-      POSTGRES_DB: streamhub_prod
-      POSTGRES_USER: streamhub_user
+      POSTGRES_DB: smartclip_prod
+      POSTGRES_USER: smartclip_user
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U streamhub_user -d streamhub_prod"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "pg_isready -U smartclip_user -d smartclip_prod"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     networks:
-      - streamhub-network
+      - smartclip-network
 
   # Redis cache
   redis:
     image: redis:7-alpine
-    container_name: streamhub-redis-prod
+    container_name: smartclip-redis-prod
     restart: always
     ports:
       - "6379:6379"
@@ -34,16 +33,16 @@ services:
       - redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: 30s
+      timeout: 10s
+      retries: 3
     networks:
-      - streamhub-network
+      - smartclip-network
 
   # Backend API
   api:
-    build: .
-    container_name: streamhub-api-prod
+    image: smartclip-backend:latest
+    container_name: smartclip-api-prod
     restart: always
     ports:
       - "3000:3000"
@@ -51,46 +50,38 @@ services:
       - NODE_ENV=production
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_NAME=streamhub_prod
-      - DB_USER=streamhub_user
+      - DB_NAME=smartclip_prod
+      - DB_USER=smartclip_user
       - DB_PASSWORD=${DB_PASSWORD}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - JWT_SECRET=${JWT_SECRET}
       - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    volumes:
-      - ./logs:/app/logs
+      - postgres
+      - redis
     networks:
-      - streamhub-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - smartclip-network
 
   # Frontend
   frontend:
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile.prod
-    container_name: streamhub-frontend-prod
+    image: smartclip-frontend:latest
+    container_name: smartclip-frontend-prod
     restart: always
     ports:
       - "80:80"
     depends_on:
       - api
     networks:
-      - streamhub-network
-
-networks:
-  streamhub-network:
-    driver: bridge
+      - smartclip-network
 
 volumes:
   postgres_data:
   redis_data:
+
+networks:
+  smartclip-network:
+    driver: bridge

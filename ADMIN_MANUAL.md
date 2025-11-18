@@ -1,6 +1,6 @@
-# StreamHub Admin Manual
+# SmartClip Admin Manual
 
-This manual provides instructions for administrators of the StreamHub platform. It covers all administrative functions and tools available to manage the platform.
+This manual provides instructions for administrators of the SmartClip platform. It covers all administrative functions and tools available to manage the platform.
 
 ## Table of Contents
 
@@ -36,9 +36,9 @@ This manual provides instructions for administrators of the StreamHub platform. 
 
 ### Logging In as Admin
 
-1. Visit the StreamHub admin login page: `/admin/login`
+1. Visit the SmartClip admin login page: `/admin/login`
 2. Use the default admin credentials:
-   - Email: admin@streamhub.com
+   - Email: admin@smartclip.com
    - Password: admin123
 3. For security, change the default password immediately after first login
 4. Enable two-factor authentication for additional security
@@ -125,7 +125,7 @@ The admin dashboard provides an overview of the platform's health and activity:
 
 ### AI Moderation System
 
-StreamHub uses AI-powered content moderation:
+SmartClip uses AI-powered content moderation:
 
 - **Content Analysis**: Automatic detection of inappropriate content
 - **Flagging System**: Suspicious content is automatically flagged for review
@@ -257,4 +257,4 @@ StreamHub uses AI-powered content moderation:
 
 ### Contact Support
 
-For technical issues not covered in this manual, contact the development team at tech-support@streamhub.com.
+For technical issues not covered in this manual, contact the development team at pksingh.sme@gmail.com.

@@ -1,9 +1,9 @@
-# StreamHub - YouTube-like Video Streaming Platform
+# SmartClip - YouTube-like Video Streaming Platform
 
-[![CI/CD](https://github.com/your-username/streamhub/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/your-username/streamhub/actions/workflows/ci-cd.yml)
+[![CI/CD](https://github.com/your-username/smart-clip/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/your-username/smart-clip/actions/workflows/ci-cd.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-StreamHub is a modern, scalable video streaming platform similar to YouTube with advanced AI-powered features, robust security, and enterprise-grade observability. Built with cutting-edge technologies, it provides a complete solution for video sharing and content management.
+SmartClip is a modern, scalable video streaming platform similar to YouTube with advanced AI-powered features, robust security, and enterprise-grade observability. Built with cutting-edge technologies, it provides a complete solution for video sharing and content management.
 
 ## 🚀 Features
 
@@ -54,7 +54,7 @@ StreamHub is a modern, scalable video streaming platform similar to YouTube with
 ## 📁 Project Structure
 
 ```
-streamhub/
+smartclip/
 ├── backend/                 # Node.js Express backend
 │   ├── src/                # Source code
 │   │   ├── controllers/    # Request handlers
@@ -90,8 +90,8 @@ streamhub/
 ### Quick Start
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/streamhub.git
-cd streamhub
+git clone https://github.com/your-username/smart-clip.git
+cd smart-clip
 
 # Start development environment
 docker-compose up -d
@@ -122,7 +122,7 @@ npm run dev & cd frontend && npm run dev
 
 ## 🛡 Security
 
-StreamHub implements enterprise-grade security features:
+SmartClip implements enterprise-grade security features:
 - JWT-based authentication with refresh tokens
 - Role-based access control
 - Input validation and sanitization
@@ -199,7 +199,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-For support, please open an issue on GitHub or contact the development team at support@streamhub.com.
+For support, please open an issue on GitHub or contact the development team at pksingh.sme@gmail.com.
 
 ## 🙏 Acknowledgments
 
@@ -210,5 +210,5 @@ For support, please open an issue on GitHub or contact the development team at s
 ---
 
 <p align="center">
-  Made with ❤️ by the StreamHub Team
+  Made with ❤️ by Pramod
 </p>

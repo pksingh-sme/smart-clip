@@ -1,6 +1,6 @@
-# StreamHub Demo Video Script
+# SmartClip Demo Video Script
 
-This script provides a detailed guide for recording a demonstration video of the StreamHub platform.
+This script provides a detailed guide for recording a demonstration video of the SmartClip platform.
 
 ## Video Structure
 
@@ -11,7 +11,7 @@ This script provides a detailed guide for recording a demonstration video of the
 ## Introduction (1-2 minutes)
 
 ### Opening Hook
-"Welcome to StreamHub, the next-generation video streaming platform that combines the best features of YouTube with cutting-edge AI technology and enterprise-grade security."
+"Welcome to SmartClip, the next-generation video streaming platform that combines the best features of YouTube with cutting-edge AI technology and enterprise-grade security."
 
 ### What We'll Cover
 1. Platform overview and key features
@@ -23,7 +23,7 @@ This script provides a detailed guide for recording a demonstration video of the
 7. Closing remarks
 
 ### Technical Stack Overview
-"Before we dive in, let's quickly review the technology stack that powers StreamHub:
+"Before we dive in, let's quickly review the technology stack that powers SmartClip:
 - Backend: Node.js with Express framework
 - Database: PostgreSQL with Redis caching
 - Frontend: React with TailwindCSS and Framer Motion
@@ -167,7 +167,7 @@ This script provides a detailed guide for recording a demonstration video of the
 ## Closing Remarks (1 minute)
 
 ### Key Takeaways
-1. "StreamHub is a production-ready platform with enterprise-grade features"
+1. "SmartClip is a production-ready platform with enterprise-grade features"
 2. "Our AI integration provides powerful content recommendations and moderation"
 3. "Security and observability are built into every layer of the platform"
 4. "The platform is fully scalable and cloud-ready"
@@ -178,7 +178,7 @@ This script provides a detailed guide for recording a demonstration video of the
 3. "Stay tuned for our public launch"
 
 ### Contact Information
-"Thank you for watching. For more information, visit our website at streamhub.com or contact us at info@streamhub.com."
+"Thank you for watching. For more information, visit our website at smartclip.com or contact us at pksingh.sme@gmail.com."
 
 ## Technical Requirements
 

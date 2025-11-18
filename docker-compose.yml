@@ -4,27 +4,27 @@ services:
   # PostgreSQL database
   postgres:
     image: postgres:15-alpine
-    container_name: streamhub-postgres
+    container_name: smartclip-postgres
     restart: always
     environment:
-      POSTGRES_DB: streamhub_dev
-      POSTGRES_USER: streamhub_user
-      POSTGRES_PASSWORD: streamhub_password
+      POSTGRES_DB: smartclip_dev
+      POSTGRES_USER: smartclip_user
+      POSTGRES_PASSWORD: smartclip_password
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U streamhub_user -d streamhub_dev"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "pg_isready -U smartclip_user -d smartclip_dev"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   # Redis cache
   redis:
     image: redis:7-alpine
-    container_name: streamhub-redis
+    container_name: smartclip-redis
     restart: always
     ports:
       - "6379:6379"
@@ -32,14 +32,14 @@ services:
       - redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   # Backend API
   api:
     build: .
-    container_name: streamhub-api
+    container_name: smartclip-api
     restart: always
     ports:
       - "3000:3000"
@@ -47,22 +47,19 @@ services:
       - NODE_ENV=development
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_NAME=streamhub_dev
-      - DB_USER=streamhub_user
-      - DB_PASSWORD=streamhub_password
+      - DB_NAME=smartclip_dev
+      - DB_USER=smartclip_user
+      - DB_PASSWORD=smartclip_password
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - JWT_SECRET=streamhub_jwt_secret
-      - JWT_REFRESH_SECRET=streamhub_jwt_refresh_secret
+      - JWT_SECRET=smartclip_jwt_secret
+      - JWT_REFRESH_SECRET=smartclip_jwt_refresh_secret
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+      - postgres
+      - redis
     volumes:
-      - ./logs:/app/logs
-      - ./src:/app/src
-    command: npm run dev
+      - .:/app
+      - /app/node_modules
 
 volumes:
   postgres_data:
