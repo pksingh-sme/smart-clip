@@ -1,0 +1,86 @@
+{
+  "family": "streamhub-backend",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::YOUR_ACCOUNT_ID:role/StreamHubTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "streamhub-backend",
+      "image": "YOUR_ECR_REPOSITORY/streamhub-backend:latest",
+      "cpu": 512,
+      "memory": 1024,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "DB_HOST",
+          "value": "YOUR_RDS_ENDPOINT"
+        },
+        {
+          "name": "DB_PORT",
+          "value": "5432"
+        },
+        {
+          "name": "DB_NAME",
+          "value": "streamhub_prod"
+        },
+        {
+          "name": "DB_USER",
+          "value": "streamhub_user"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "value": "YOUR_DB_PASSWORD"
+        },
+        {
+          "name": "REDIS_HOST",
+          "value": "YOUR_ELASTICACHE_ENDPOINT"
+        },
+        {
+          "name": "REDIS_PORT",
+          "value": "6379"
+        },
+        {
+          "name": "JWT_SECRET",
+          "value": "YOUR_JWT_SECRET"
+        },
+        {
+          "name": "JWT_REFRESH_SECRET",
+          "value": "YOUR_JWT_REFRESH_SECRET"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/streamhub-backend",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:3000/health || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "streamhub-backend",
+  "version": "1.0.0",
+  "description": "Backend for StreamHub - A YouTube-like video streaming platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.js",
+    "build": "rimraf dist && babel src --out-dir dist --copy-files",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "migrate": "node-pg-migrate",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.js"
+  },
+  "keywords": [
+    "video",
+    "streaming",
+    "youtube",
+    "nodejs",
+    "express"
+  ],
+  "author": "StreamHub Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.11.0",
+    "redis": "^4.6.7",
+    "jsonwebtoken": "^9.0.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "aws-sdk": "^2.1415.0",
+    "openai": "^4.0.0",
+    "zod": "^3.21.4",
+    "express-rate-limit": "^6.8.1",
+    "dotenv": "^16.3.1",
+    "uuid": "^9.0.0",
+    "ioredis": "^5.3.2",
+    "winston": "^3.10.0",
+    "prom-client": "^15.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.6.1",
+    "supertest": "^6.3.3",
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "rimraf": "^5.0.1",
+    "node-pg-migrate": "^6.2.2"
+  }
+}
